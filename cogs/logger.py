@@ -96,6 +96,90 @@ class Logger(commands.Cog):
                 }
             ])
 
+    @commands.Cog.listener()
+    async def on_guild_channel_create(self, channel):
+        await self.send_log({
+            'title': 'Channel Created',
+            'description': f'{channel.guild} created a channel'
+        }, channel, [
+            {
+                'name': 'Channel',
+                'value': channel.mention
+            }
+        ])
+
+    @commands.Cog.listener()
+    async def on_guild_channel_delete(self, channel):
+        await self.send_log({
+            'title': 'Channel Deleted',
+            'description': f'{channel.guild} deleted a channel'
+        }, channel, [
+            {
+                'name': 'Channel',
+                'value': channel.mention
+            }
+        ])
+
+    @commands.Cog.listener()
+    async def on_guild_channel_update(self, before, after):
+        if before.name != after.name:
+            await self.send_log({
+                'title': 'Channel Name Changed',
+                'description': f'{before.guild} changed a channel\'s name'
+            }, before, [
+                {
+                    'name': 'Before',
+                    'value': before.name
+                },
+                {
+                    'name': 'After',
+                    'value': after.name
+                }
+            ])
+
+    @commands.Cog.listener()
+    async def on_guild_role_create(self, role):
+        await self.send_log({
+            'title': 'Role Created',
+            'description': f'{role.guild} created a role'
+        }, role, [
+            {
+                'name': 'Role',
+                'value': role.mention
+            }
+        ])
+
+    @commands.Cog.listener()
+    async def on_guild_role_delete(self, role):
+        await self.send_log({
+            'title': 'Role Deleted',
+            'description': f'{role.guild} deleted a role'
+        }, role, [
+            {
+                'name': 'Role',
+                'value': role.mention
+            }
+        ])
+
+    @commands.Cog.listener()
+    async def on_guild_role_update(self, before, after):
+        if before.name != after.name:
+            await self.send_log({
+                'title': 'Role Name Changed',
+                'description': f'{before.guild} changed a role\'s name'
+            }, before, [
+                {
+                    'name': 'Before',
+                    'value': before.name
+                },
+                {
+                    'name': 'After',
+                    'value': after.name
+                }
+            ])
+    
+
+
 
 def setup(bot):
     bot.add_cog(Logger(bot))
