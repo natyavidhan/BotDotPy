@@ -178,6 +178,23 @@ class Logger(commands.Cog):
                 }
             ])
     
+    @commands.Cog.listener()
+    async def on_voice_state_update(member, before, after):
+        if before.channel == None and after.channel != None:
+            await self.send_log({
+                'title': 'Member Joined Voice Channel',
+                'description': f'{member} has joined {after.channel}'
+            }, member)
+        elif before.channel != None and after.channel == None:
+            await self.send_log({
+                'title': 'Member Left Voice Channel',
+                'description': f'{member} has left {before.channel}'
+            }, member)
+        elif before.channel != None and after.channel != None:
+            await self.send_log({
+                'title': 'Member Moved Voice Channel',
+                'description': f'{member} has moved from {before.channel} to {after.channel}'
+            }, member)
 
 
 
