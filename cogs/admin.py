@@ -61,7 +61,7 @@ class Admin(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def unmute(self, ctx, member: discord.Member):
         role = discord.utils.get(ctx.guild.roles, name='Muted')
-        await member.remove_roles(role, reason=reason)
+        await member.remove_roles(role, reason=None)
         await self.send_log({
             'title': 'Unmuted',
             'description': f'{member.mention} was unmuted by {ctx.author.mention}'
