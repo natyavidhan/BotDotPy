@@ -2,6 +2,7 @@ from discord.ext import commands
 import discord
 import os
 from dotenv import load_dotenv
+from server import keep_alive
 
 if os.path.isfile('.env'):
     load_dotenv()
@@ -21,4 +22,5 @@ async def on_ready():
     print('------')
 
 if __name__ == '__main__':
+    keep_alive()
     client.run(os.getenv('TOKEN'))
