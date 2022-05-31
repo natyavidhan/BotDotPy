@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 import random
 import requests
-from PIL import Image
 import re
 
 class Fun(commands.Cog):
