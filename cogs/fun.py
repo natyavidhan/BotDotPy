@@ -18,7 +18,7 @@ class Fun(commands.Cog):
         emoji_string = ""
         for char in text:
             if re.match(r'[a-zA-Z]', char):
-                emoji = f":regional_indicator_{char}:"
+                emoji = f":regional_indicator_{char.lower()}:"
                 emoji_string += emoji
             else:
                 emoji_string += char
